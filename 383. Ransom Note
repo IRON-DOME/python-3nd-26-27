@@ -1,0 +1,17 @@
+from collections import Counter
+class Solution(object):
+    def canConstruct(self, ransomNote, magazine):
+        """
+        :type ransomNote: str
+        :type magazine: str
+        :rtype: bool
+        """
+        self.data = Counter(magazine)
+        self.itog =  Counter(ransomNote)
+        for i in self.itog:
+            if self.data[i] >= self.itog[i]:
+                pass
+            else:
+                return False
+        return True
+
