@@ -1,0 +1,43 @@
+class Solution(object):
+    def mergeTrees(self, root1, root2):
+        """
+        :type root1: Optional[TreeNode]
+        :type root2: Optional[TreeNode]
+        :rtype: Optional[TreeNode]
+        """
+        if root1 is None:
+            return root2
+        if root2 is None:
+            return root1
+        
+        ugabuga = TreeNode(root1.val + root2.val)
+        stack = [(root1, root2, ugabuga)]
+        
+        while stack:
+            n1, n2, parent = stack.pop()
+            
+            l1 = n1.left
+            l2 = n2.left
+            
+            if l1 is not None and l2 is not None:
+                new_left = TreeNode(l1.val + l2.val)
+                parent.left = new_left
+                stack.append((l1, l2, new_left))
+            elif l1 is not None:
+                parent.left = l1
+            elif l2 is not None:
+                parent.left = l2
+            
+            r1 = n1.right
+            r2 = n2.right
+            
+            if r1 is not None and r2 is not None:
+                new_right = TreeNode(r1.val + r2.val)
+                parent.right = new_right
+                stack.append((r1, r2, new_right))
+            elif r1 is not None:
+                parent.right = r1
+            elif r2 is not None:
+                parent.right = r2
+        
+        return ugabuga
